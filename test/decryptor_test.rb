@@ -24,6 +24,7 @@ class EncryptorTest < Minitest::Test
   end
 
   def test_can_create_a_nest_array_of_characters
+    skip
     message = "u2hs1"
     decrypted_string = Decryptor.new(12345, 1111, message)
     assert_equal [["u", "2", "h", "s"], ["1"]], decrypted_string.decrypt

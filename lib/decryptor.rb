@@ -30,13 +30,13 @@ class Decryptor
     chars = ("a".."z").to_a + ("0".."9").to_a + (" .,").chars
     d_rotated_chars = chars.rotate(0 - rotation)
     d_rotated_pairs = Hash[chars.zip(d_rotated_chars)]
-    binding.pry
+    # binding.pry
   end
 
   def decrypt
     decrypted_chars_array = []
     @message.split("").each_slice(4){|chars|decrypted_chars_array << chars}
-    # decrypted_chars_array
+    decrypted_chars_array
     d_msg = []
     decrypted_chars_array.each do |char|
       # binding.pry
@@ -45,16 +45,6 @@ class Decryptor
       d_msg << decrypt_cipher(rotation_c)[char[2]]
       d_msg << decrypt_cipher(rotation_d)[char[3]]
     end
-    e_message.join
+    d_msg.join
   end
 end
-
-
-# def decrypt(string, rotation)
-#   d_letters = string.split("")
-#   d_rotation = 0 - rotation
-#   d_results = d_letters.collect do |letter|
-#     decrypted_letter = encrypt_letter(letter, d_rotation)
-#   end
-#   d_results.join
-# end

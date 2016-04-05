@@ -31,7 +31,7 @@ class EncryptorTest < Minitest::Test
   end
 
   def test_it_can_encrypt_a_message
-    e = Encryptor.new(12345, 1111, "hello")
-    assert_equal "u2hs1", e.encrypt
+    d = Encryptor.new(12345, 1111, "hello")
+    assert_equal "u2hs1", d.encrypt
   end
 end
