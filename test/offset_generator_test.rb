@@ -7,4 +7,6 @@ class OffsetGeneratorTest < Minitest::Test
     offset = OffsetGenerator.new
     assert_equal 3056, offset.generate_offset
   end
+
+  # Do I want to write more tests? If so, what tests?
 end

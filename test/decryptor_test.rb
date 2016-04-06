@@ -34,4 +34,7 @@ class EncryptorTest < Minitest::Test
     d = Decryptor.new(12345, 1111, "u2hs1")
     assert_equal "hello", d.decrypt
   end
+
+# Do I want to write more tests? If so, what tests?
+
 end

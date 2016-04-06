@@ -11,7 +11,7 @@ class CrackTest < Minitest::Test
     offset = 3056
     crack = Crack.new
 
-    assert_equal "Hello World..end..", crack.cracking(message,offset)
+    assert_equal "Hello World..end..", crack.cracking(message)
   end
 
 

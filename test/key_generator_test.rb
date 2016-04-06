@@ -7,4 +7,6 @@ class KeyGeneratorTest < Minitest::Test
     key = KeyGenerator.new
     assert key.generate_key
   end
+
+# Do I want to write more tests? If so, what tests?
 end

@@ -30,7 +30,6 @@ class Decryptor
     chars = ("a".."z").to_a + ("0".."9").to_a + (" .,").chars
     d_rotated_chars = chars.rotate(0 - rotation)
     d_rotated_pairs = Hash[chars.zip(d_rotated_chars)]
-    # binding.pry
   end
 
   def decrypt
@@ -39,7 +38,6 @@ class Decryptor
     decrypted_chars_array
     d_msg = []
     decrypted_chars_array.each do |char|
-      # binding.pry
       d_msg << decrypt_cipher(rotation_a)[char[0]]
       d_msg << decrypt_cipher(rotation_b)[char[1]]
       d_msg << decrypt_cipher(rotation_c)[char[2]]

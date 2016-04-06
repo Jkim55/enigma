@@ -42,17 +42,16 @@ class Encryptor
       e_message << encrypt_cipher(rotation_c)[char[2]]
       e_message << encrypt_cipher(rotation_d)[char[3]]
     end
-    # binding.pry
     e_message.join
   end
 
-  def encrypt_file(filename, rotation) # get command line working
-    input = File.open(filename, 'r')
-    open_file = input.read
-    encrypted_text = self.encrypt(open_file, rotation)
-    encrypted_name = filename + ".encrypted"     # why isn't the extension to this .txt
-    output = File.open(encrypted_name, 'w')
-    output.write(encrypted_text)
-    output.close
-  end
+  # def encrypt_file(filename, rotation) # get command line working
+  #   input = File.open(filename, 'r')
+  #   open_file = input.read
+  #   encrypted_text = self.encrypt(open_file, rotation)
+  #   encrypted_name = filename + ".encrypted"     # why isn't the extension to this .txt
+  #   output = File.open(encrypted_name, 'w')
+  #   output.write(encrypted_text)
+  #   output.close
+  # end
 end
