@@ -1,7 +1,7 @@
-require_relative "key_generator"
-require_relative "offset_generator"
-require_relative "encryptor"
-require_relative "decryptor"
+require "./lib/key_generator"
+require "./lib/offset_generator"
+require "./lib/encryptor"
+require "./lib/decryptor"
 require "pry"
 
 class Crack
@@ -41,26 +41,29 @@ class Crack
     @key.to_s[3..4].to_i + @offset.to_s[3].to_i
   end
 
-  def decrypt_cipher(rotation)
+  def crack_cipher(rotation)
     chars = ("a".."z").to_a + ("0".."9").to_a + (" .,").chars
-    d_rotated_chars = chars.rotate(0 - rotation)
-    d_rotated_pairs = Hash[chars.zip(d_rotated_chars)]
+    c_rotated_chars = chars.rotate(0 - rotation)
+    c_rotated_pairs = Hash[chars.zip(c_rotated_chars)]
   end
 
   def crack
-    decrypted_chars_array = []
-    @message.split("").each_slice(4){|chars|decrypted_chars_array << chars}
-    decrypted_chars_array
-    d_msg = []
-    decrypted_chars_array.each do |char|
-      d_msg << decrypt_cipher(rotation_a)[char[0]]
-      d_msg << decrypt_cipher(rotation_b)[char[1]]
-      d_msg << decrypt_cipher(rotation_c)[char[2]]
-      d_msg << decrypt_cipher(rotation_d)[char[3]]
+    cracked_chars_array = []
+    @message.split("").each_slice(4){|chars|cracked_chars_array << chars}
+    cracked_chars_array
+    c_msg = []
+    cracked_chars_array.each do |char|
+      c_msg << crack_cipher(rotation_a)[char[0]]
+      c_msg << crack_cipher(rotation_b)[char[1]]
+      c_msg << crack_cipher(rotation_c)[char[2]]
+      c_msg << crack_cipher(rotation_d)[char[3]]
     end
-    d_msg.join
+    c_msg.join
   end
 
+  def cracking
+
+  end
 end
 
 

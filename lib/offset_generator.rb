@@ -7,3 +7,6 @@ class OffsetGenerator
     offset = current_date_squared.to_s[-4..-1].to_i
   end
 end
+
+
+# Do I need to add to this?

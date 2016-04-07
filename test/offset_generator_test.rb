@@ -9,4 +9,5 @@ class OffsetGeneratorTest < Minitest::Test
   end
 
   # Do I want to write more tests? If so, what tests?
+
 end

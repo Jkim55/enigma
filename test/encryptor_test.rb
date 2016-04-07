@@ -1,6 +1,6 @@
 require 'minitest/autorun'
 require 'minitest/pride'
-require_relative "../lib/encryptor"
+require "./lib/encryptor"
 
 class EncryptorTest < Minitest::Test
   def test_it_can_create_rotation_a
