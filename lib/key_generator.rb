@@ -2,9 +2,9 @@ require 'pry'
 
 class KeyGenerator
   def generate_key(key = nil)
-     key = (0..4).collect{rand(0..9)}
+     key = key || (0..4).collect{rand(0..9)}.join
   end
 end
 
-
-# Do I need to add to this?
+# If you have energy after file IO and crack,
+# you may add test re given key == string and 5 chars

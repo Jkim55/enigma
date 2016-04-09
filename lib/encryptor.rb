@@ -6,7 +6,7 @@ class Encryptor
   attr_reader :message, :key, :date
 
   def initialize(message, key, date)
-    @key = key || KeyGenerator.new.generate_key(key)
+    @key = key || KeyGenerator.new.generate_key
     @date = OffsetGenerator.new(date).date
     @message = message
   end
@@ -28,7 +28,7 @@ class Encryptor
   end
 
   def encrypt_cipher(rotation)
-    chars = ("a".."z").to_a + ("0".."9").to_a + (" .,").chars
+    chars = ("A".."Z").to_a + ("a".."z").to_a + ("0".."9").to_a + (" .,").chars
     rotated_chars = chars.rotate(rotation)
     rotated_pairs = Hash[chars.zip(rotated_chars)]
   end
