@@ -30,13 +30,13 @@ class EncryptorTest < Minitest::Test
 
   def test_it_can_create_rotation_a_when_no_date_is_given
     message = "hello"
-    encrypt = Encryptor.new(message, 12345)
+    encrypt = Encryptor.new(message, "12345")
     assert_equal 15, encrypt.rotation_a
   end
 
   def test_it_can_encrypt_a_message
-    message = "hello world ..end.."
-    e = Encryptor.new(message, "00005", "090416")
+    message = "hello"
+    e = Encryptor.new(message, "12345", "030416")
     assert_equal "w1LX3", e.encrypt
   end
 

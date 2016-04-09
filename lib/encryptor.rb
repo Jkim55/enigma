@@ -1,6 +1,5 @@
 require "./lib/key_generator"
 require "./lib/offset_generator"
-require "date"
 require "pry"
 
 class Encryptor
@@ -46,14 +45,14 @@ class Encryptor
     end
     e_message.join
   end
-
-  # def encrypt_file(filename, rotation) # get command line working
-  #   input = File.open(filename, 'r')
-  #   open_file = input.read
-  #   encrypted_text = self.encrypt(open_file, rotation)
-  #   encrypted_name = filename + ".encrypted"     # why isn't the extension to this .txt
-  #   output = File.open(encrypted_name, 'w')
-  #   output.write(encrypted_text)
-  #   output.close
-  # end
 end
+
+# def encrypt_file(filename, rotation) # get command line working
+#   input = File.open(filename, 'r')
+#   open_file = input.read
+#   encrypted_text = self.encrypt(open_file, rotation)
+#   encrypted_name = filename + ".encrypted"     # why isn't the extension to this .txt
+#   output = File.open(encrypted_name, 'w')
+#   output.write(encrypted_text)
+#   output.close
+# end
