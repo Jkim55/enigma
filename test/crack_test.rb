@@ -49,14 +49,14 @@ class CrackTest < Minitest::Test
     assert_equal "00007", crack.crack
   end
 
-  def test_it_can_crack_message_when_no_date_is_given
+  def test_it_can_crack_message_when_date_is_not_given
     #key = 00005 date=090416
     message = "keqwr 1zuliIB.jyg.D"
     crack = Crack.new(message)
     assert_equal "00005", crack.crack
   end
 
-  def test_it_can_crack_another_message_when_no_date_is_given
+  def test_it_can_crack_another_message_when_date_is_not_given
     #key = 00003 date=090416
     message = "JotmeyjIAwt0odDHhniHB"
     crack = Crack.new(message)
