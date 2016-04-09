@@ -1,7 +1,6 @@
 require 'minitest/autorun'
 require 'minitest/pride'
 require "./lib/decryptor"
-require 'date'
 
 class DecryptorTest < Minitest::Test
   def test_it_can_create_rotation_a
@@ -29,11 +28,8 @@ class DecryptorTest < Minitest::Test
   end
 
   def test_it_can_decrypt_a_message
-    message = "w1lx3"
+    message = "w1LX3"
     d = Decryptor.new(message, 12345, "030416")
     assert_equal "hello", d.decrypt
   end
-
-# Do I want to write more tests? If so, what tests?
-
 end

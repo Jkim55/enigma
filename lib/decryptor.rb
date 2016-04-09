@@ -28,7 +28,7 @@ class Decryptor
   end
 
   def decrypt_cipher(rotation)
-    chars = ("a".."z").to_a + ("0".."9").to_a + (" .,").chars
+    chars = ("A".."Z").to_a + ("a".."z").to_a + ("0".."9").to_a + (" .,").chars
     d_rotated_chars = chars.rotate(0 - rotation)
     d_rotated_pairs = Hash[chars.zip(d_rotated_chars)]
   end

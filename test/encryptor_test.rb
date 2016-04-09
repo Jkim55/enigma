@@ -15,7 +15,7 @@ class EncryptorTest < Minitest::Test
     encrypt = Encryptor.new(message, 12345, "030416")
     assert_equal 23, encrypt.rotation_b
   end
-  
+
   def test_it_can_create_rotation_c
     message = "hello"
     encrypt = Encryptor.new(message, 12345, "030416")
@@ -31,8 +31,6 @@ class EncryptorTest < Minitest::Test
   def test_it_can_encrypt_a_message
     message = "hello"
     e = Encryptor.new(message, 12345, "030416")
-    assert_equal "w1lx3", e.encrypt
+    assert_equal "w1LX3", e.encrypt
   end
-
-  # Do I want to write more tests? If so, what tests?
 end
