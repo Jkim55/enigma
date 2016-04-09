@@ -1,11 +1,12 @@
 require "./lib/key_generator"
 require "./lib/offset_generator"
+require "date"
 require "pry"
 
 class Encryptor
   attr_reader :message, :key, :date
 
-  def initialize(message, key, date)
+  def initialize(message, key, date = Time.now.strftime("%d%m%y"))
     @key = key || KeyGenerator.new.generate_key
     @date = OffsetGenerator.new(date).date
     @message = message
@@ -35,8 +36,7 @@ class Encryptor
 
   def encrypt
     chars_array = []
-    message.chars.each_slice(4){|chars|chars_array << chars}
-    # chars_array
+    message.chars.each_slice(4){|char|chars_array << char}
     e_message = []
     chars_array.each do |char|
       e_message << encrypt_cipher(rotation_a)[char[0]]

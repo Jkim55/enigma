@@ -5,7 +5,7 @@ require "pry"
 class Decryptor
   attr_reader :message, :key, :date
 
-  def initialize(message, key, date)
+  def initialize(message, key, date = Time.now.strftime("%d%m%y"))
     @key = key || KeyGenerator.new.generate_key(key)
     @date = OffsetGenerator.new(date).date
     @message = message
@@ -35,7 +35,7 @@ class Decryptor
 
   def decrypt
     decrypted_chars_array = []
-    message.chars.each_slice(4){|chars|decrypted_chars_array << chars}
+    message.chars.each_slice(4){|char|decrypted_chars_array << char}
     decrypted_chars_array
     d_msg = []
     decrypted_chars_array.each do |char|
