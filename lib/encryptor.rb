@@ -3,26 +3,28 @@ require "./lib/offset_generator"
 require "pry"
 
 class Encryptor
-  def initialize(key, offset, message=nil)
-    @key = key
-    @offset = offset
+  attr_reader :message, :key, :date
+
+  def initialize(message, key, date)
+    @key = key || KeyGenerator.new.generate_key(key)
+    @date = OffsetGenerator.new(date).date
     @message = message
   end
 
   def rotation_a
-    @key.to_s[0..1].to_i + @offset.to_s[0].to_i
+    key.to_s[0..1].to_i + date.to_s[0].to_i
   end
 
   def rotation_b
-    @key.to_s[1..2].to_i + @offset.to_s[1].to_i
+    key.to_s[1..2].to_i + date.to_s[1].to_i
   end
 
   def rotation_c
-    @key.to_s[2..3].to_i + @offset.to_s[2].to_i
+    key.to_s[2..3].to_i + date.to_s[2].to_i
   end
 
   def rotation_d
-    @key.to_s[3..4].to_i + @offset.to_s[3].to_i
+    key.to_s[3..4].to_i + date.to_s[3].to_i
   end
 
   def encrypt_cipher(rotation)
@@ -33,7 +35,7 @@ class Encryptor
 
   def encrypt
     chars_array = []
-    @message.split("").each_slice(4){|chars|chars_array << chars}
+    message.chars.each_slice(4){|chars|chars_array << chars}
     # chars_array
     e_message = []
     chars_array.each do |char|

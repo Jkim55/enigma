@@ -1,10 +1,18 @@
 require 'pry'
 
 class OffsetGenerator
-  def generate_offset
-    current_date = Time.now.strftime("%d%m%y")
-    current_date_squared = current_date.to_i ** 2
-    offset = current_date_squared.to_s[-4..-1].to_i
+  attr_reader :date
+
+  def initialize(date = Time.now.strftime("%d%m%y"))
+    @date = offset(date)
+  end
+
+  def offset(date)
+    doubled_date(date).to_s[-4..-1].to_i
+  end
+
+  def doubled_date(date)
+      date.to_i ** 2
   end
 end
 

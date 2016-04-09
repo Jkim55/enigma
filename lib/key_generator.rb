@@ -1,7 +1,7 @@
 require 'pry'
 
 class KeyGenerator
-  def generate_key
+  def generate_key(key = nil)
      key = (0..4).collect{rand(0..9)}
   end
 end
