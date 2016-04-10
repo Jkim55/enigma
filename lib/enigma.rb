@@ -2,7 +2,6 @@ require "./lib/encryptor"
 require "./lib/decryptor"
 require "./lib/crack"
 
-
 class Enigma
 attr_reader :key, :date
 
