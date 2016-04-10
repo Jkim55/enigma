@@ -5,10 +5,19 @@ require "./lib/crack"
 class Enigma
 attr_reader :key, :date
 
+  def initialize(file_path, encrypted_file)
+    @file_path = file_path
+    @encrypted_file = encrypted_file
+  end
+
   def encrypt(message, key=nil, date=Time.now.strftime("%d%m%y"))
     e = Encryptor.new(message, key, date)
     e.encrypt
     # call on write_encrypt_txt
+  end
+
+  def read_message
+    File.read(@file_path)
   end
 
   def write_encrypt_txt

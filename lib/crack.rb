@@ -4,9 +4,7 @@ require "./lib/encryptor"
 require "./lib/decryptor"
 require "pry"
 
-# ***switch to a new branch*****
 class Crack
-  # attr_accessor :index, :key, :date, :message
   def initialize(message, date = Time.now.strftime("%d%m%y"))
     @index = 0
     @message = message
