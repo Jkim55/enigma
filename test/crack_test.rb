@@ -1,8 +1,9 @@
+require 'simplecov'
+SimpleCov.start
+
 require 'minitest/autorun'
 require 'minitest/pride'
 require "./lib/crack"
-
-
 
 class CrackTest < Minitest::Test
   # def test_it_can_create_rotation_a
