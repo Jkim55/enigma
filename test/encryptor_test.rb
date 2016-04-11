@@ -6,46 +6,28 @@ require 'minitest/pride'
 require "./lib/encryptor"
 
 class EncryptorTest < Minitest::Test
+  attr_accessor :file_path
 
-  def test_it_can_create_rotation_a
-    message = "hello"
-    encrypt = Encryptor.new(message, "12345", "030416")
-    assert_equal 15, encrypt.rotation_a
+  def setup
+    self.file_path = File.expand_path'../../lib/test.txt',__FILE__
+    @filename = 'test.txt'
+    @encrypted_file = 'test_encrypted.txt'
+    @encrypt = Encryptor.new(@file_path, @encrypted_file)
   end
 
-  def test_it_can_create_rotation_b
-    message = "hello"
-    encrypt = Encryptor.new(message, "12345", "030416")
-    assert_equal 23, encrypt.rotation_b
+  def test_encryptor_is_initialized_with_certain_parameters
+    assert Encryptor.new(@file_path, "test_encrypted.txt")
   end
 
-  def test_it_can_create_rotation_c
-    message = "hello"
-    encrypt = Encryptor.new(message, "12345", "030416")
-    assert_equal 39, encrypt.rotation_c
+  def test_it_can_read_a_file
+    assert_equal "hello there", @encrypt.read_message
   end
 
-  def test_it_can_create_rotation_d
-    message = "hello"
-    encrypt = Encryptor.new(message, "12345", "030416")
-    assert_equal 51, encrypt.rotation_d
-  end
-
-  def test_it_can_create_rotation_a_when_no_date_is_given
-    message = "hello"
-    encrypt = Encryptor.new(message, "12345")
-    assert_equal 15, encrypt.rotation_a
-  end
-
-  def test_it_can_encrypt_a_message
-    message = "hello"
-    e = Encryptor.new(message, "12345", "030416")
-    assert_equal "w1LX3", e.encrypt
-  end
-
-  def test_it_can_encrypt_a_message_when_no_date_is_given
-    message = "hello"
-    e = Encryptor.new(message, "12345", "030416")
-    assert e.encrypt
+  def test_it_can_write_the_encrypted_message_to_a_different_file
+    @encrypt = Encryptor.new(@file_path, "test_encrypted.txt")
+    message = File.read(@file_path)
+    key = "12345"
+    date = "030416"
+    assert_equal 11, @encrypt.encrypt(message, key, date).length
   end
 end

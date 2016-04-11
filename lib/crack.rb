@@ -4,14 +4,29 @@ require "./lib/encryptor"
 require "./lib/decryptor"
 require "pry"
 
-# ***switch to a new branch*****
+
 class Crack
-  # attr_accessor :index, :key, :date, :message
-  def initialize(message, date = Time.now.strftime("%d%m%y"))
+  attr_reader :file_path, :crack_file, :date
+
+  def initialize(file_path, crack_file, date = Time.now.strftime("%d%m%y"))
+    @file_path = file_path
     @index = 0
-    @message = message
+    @crack_file = crack_file
     @date = OffsetGenerator.new(date).date
   end
+
+    def read_message
+      File.read(@file_path).chomp
+    end
+
+    def crack_message
+      crack(read_message, date)
+    end
+
+    def write_message
+      crack_file = File.open(@crack_file, 'w')
+      crack_file.write(crack_message)
+    end
 
   def generate_all_possible_keys
     @key_val = (0..99999).map {|num| num.to_s.rjust(5,'0').chars.map(&:to_i)}
@@ -51,12 +66,12 @@ class Crack
     c_rotated_pairs = Hash[chars.zip(c_rotated_chars)]
   end
 
-  def crack
+  def crack(message, date)
     key_found = false
 
     until key_found == true
       cracked_chars_array = []
-      @message.chars.each_slice(4){|char|cracked_chars_array << char}
+      message.chars.each_slice(4){|char|cracked_chars_array << char}
       cracked_chars_array
       c_msg = []
       cracked_chars_array.each do |char|
@@ -72,7 +87,6 @@ class Crack
           puts c_msg.join
           return @key
         else
-          # binding.pry
           pull_key_val
           generate_offset
           rotation_a
@@ -81,5 +95,14 @@ class Crack
           rotation_d
         end
     end
+    puts "Created '#{@crack_file}' with cracked key #{@key} and date #{@date}"
   end
+end
+
+if __FILE__ == $0
+  file_path = ARGV[0]
+  crack_file = ARGV[1]
+  date = ARGV[2]
+  crack = Crack.new(file_path, crack_file, date)
+  crack.write_message
 end

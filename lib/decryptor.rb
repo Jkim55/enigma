@@ -5,10 +5,24 @@ require "pry"
 class Decryptor
   attr_reader :message, :key, :date
 
-  def initialize(message, key, date = Time.now.strftime("%d%m%y"))
-    @key = key || KeyGenerator.new.generate_key(key)
+  def initialize(file_path, decrypted_file, key, date)
+    @file_path = file_path
+    @decrypted_file = decrypted_file
     @date = OffsetGenerator.new(date).date
-    @message = message
+    @key = key
+  end
+
+  def read_message
+    File.read(@file_path).chomp
+  end
+
+  def decrypt_message
+      decrypt(read_message, key, date)
+  end
+
+  def write_message
+    decrypted_file = File.open(@decrypted_file, 'w')
+    decrypted_file.write(decrypt_message)
   end
 
   def rotation_a
@@ -33,7 +47,8 @@ class Decryptor
     d_rotated_pairs = Hash[chars.zip(d_rotated_chars)]
   end
 
-  def decrypt
+  def decrypt(message, key, date = nil)
+    puts "Created '#{@decrypted_file}' with the key #{@key} and date #{@date}"
     decrypted_chars_array = []
     message.chars.each_slice(4){|char|decrypted_chars_array << char}
     decrypted_chars_array
@@ -46,4 +61,13 @@ class Decryptor
     end
     d_msg.join
   end
+end
+
+if __FILE__ == $0
+  file_path = ARGV[0]
+  decrypted_file = ARGV[1]
+  key = ARGV[2]
+  date = ARGV[3]
+  decrypt = Decryptor.new(file_path, decrypted_file, key, date)
+  decrypt.write_message
 end
