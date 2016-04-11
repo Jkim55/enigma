@@ -22,7 +22,7 @@ class Crack
     def crack_message
       crack(read_message, date)
     end
-
+# 
     def write_message
       crack_file = File.open(@crack_file, 'w')
       crack_file.write(crack_message)
