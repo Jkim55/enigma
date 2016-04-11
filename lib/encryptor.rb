@@ -48,6 +48,7 @@ class Encryptor
 
   def encrypt(message, key = nil, date = nil)
     @key = key || KeyGenerator.new.generate_key
+    # @key = "00004" #-- for the sake of showing that it works. uncomment this out.
     @date = date || OffsetGenerator.new.date
     puts "Created '#{@encrypted_file}' with the key #{@key} and date #{@date}"
     chars_array = []

@@ -6,31 +6,28 @@ require 'minitest/pride'
 require "./lib/crack"
 
 class CrackTest < Minitest::Test
-  def test_it_can_crack_message_when_date_is_given
-    #key = 00011 date = 271114
-    message = "bwvm0xFJnwkJH"
-    crack = Crack.new(message, "271114")
-    assert_equal "00011", crack.crack
+  attr_accessor :file_path
+
+  def setup
   end
 
-  def test_it_can_crack_another_message_when_date_is_given
-    #key = 00007 date = 150410
-    message = "avplz.SLKSEaFnez0bglG,eul,."
-    crack = Crack.new(message, "150410")
-    assert_equal "00007", crack.crack
+  def test_it_can_crack_message
+    self.file_path = File.expand_path'../../lib/test_encrypted2.txt',__FILE__
+    @filename = 'test_encrypted2.txt'
+    @crack_file = 'test_crack.txt'
+    @date = "100416"
+    @crack = Crack.new(@file_path, @crack_file, @date)
+
+    assert_equal "00005", @crack.crack_message
   end
 
-  def test_it_can_crack_message_when_date_is_not_given
-    #key = 00005 date=090416
-    message = "keqwr 1zuliIB.jyg.D"
-    crack = Crack.new(message)
-    assert_equal "00005", crack.crack
-  end
+  def test_it_can_crack_another_message
+    self.file_path = File.expand_path'../../lib/test_encrypted3.txt',__FILE__
+    @filename = 'test_encrypted3.txt'
+    @crack_file = 'test_crack.txt'
+    @date = "100416"
+    @crack = Crack.new(@file_path, @crack_file, @date)
 
-  def test_it_can_crack_another_message_when_date_is_not_given
-    #key = 00003 date=090416
-    message = "JotmeyjIAwt0odDHhniHB"
-    crack = Crack.new(message)
-    assert_equal "00003", crack.crack
+    assert_equal "00011", @crack.crack_message
   end
 end
